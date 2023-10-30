@@ -7,9 +7,11 @@ import pl.pwr.ite.bedrylo.data.Ski;
 import java.util.HashMap;
 
 public abstract class PairPointsCalculator {
-    public static @NotNull HashMap<Ski, Float> calculatePairPoints(PersonalPreference preference, Ski ski){
+    public static Float calculatePairPoints(@NotNull PersonalPreference preference, Ski ski){
+        if (ski == null) {
+            return -500f;
+        }
         Float points = null;
-        Ski bestSki = null;
         for (Ski PreferenceSki : preference.getPrefferedSkis()) {
             Float tempPoints = 0f;
             if (ski.getType().equals(PreferenceSki.getType())) {
@@ -25,14 +27,10 @@ public abstract class PairPointsCalculator {
             tempPoints *= (((100 - preference.getDiscount()))/100f);
             if (points == null) {
                 points = tempPoints;
-                bestSki = PreferenceSki;
             } else if (tempPoints >= points) {
                 points = tempPoints;
-                bestSki = PreferenceSki;
             }
         }
-        HashMap<Ski, Float> pointsMap = new HashMap<>();
-        pointsMap.put(bestSki, points);
-        return pointsMap;
+        return points;
     }
 }

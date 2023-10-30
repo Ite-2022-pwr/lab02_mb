@@ -45,8 +45,8 @@ public class FileHandler {
         return null;
     }
     
-    public static List<PersonalPreference> readPreferenceList(String filePath) {
-        return readFile(filePath, (line -> {
+    public static Void readPreferenceList(String filePath) {
+            readFile(filePath, (line -> {
             var preferenceLine = line.split(",");
             var skiList = new ArrayList<Ski>();
             var availablePreferences = preferenceLine[2].split(";");
@@ -55,8 +55,10 @@ public class FileHandler {
                 Ski ski = new Ski(SkiTypes.getSkiType(skiInfo[0]), Integer.parseInt(skiInfo[1]));
                 skiList.add(ski);
             }
-            return new PersonalPreference(Integer.parseInt(preferenceLine[0]), skiList, preferenceLine[1].charAt(0));
+            PreferenceList.addPreference(new PersonalPreference(Integer.parseInt(preferenceLine[0]), skiList, preferenceLine[1].charAt(0)));
+            return null;
         }));
+    return null;
     }
     
 }

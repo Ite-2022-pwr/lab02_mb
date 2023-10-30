@@ -1,37 +1,50 @@
 package pl.pwr.ite.bedrylo.data;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class PreferenceList {
-    private List<PersonalPreference> preferences;
+public abstract class PreferenceList {
+    private static ArrayList<PersonalPreference> preferences = new ArrayList<>();
     
-    public PreferenceList(List<PersonalPreference> preferences) {
-        this.preferences = preferences;
+    public PreferenceList(ArrayList<PersonalPreference> preferences) {
+        PreferenceList.preferences = preferences;
     }
     
-    public List<PersonalPreference> getPreferences() {
+    public static List<PersonalPreference> getPreferences() {
         return preferences;
     }
     
-    public List<PersonalPreference> getPreferencesByAgeGroup(Character ageGroup) {
+    public static Void addPreference(PersonalPreference preference) {
+        preferences.add(preference);
+        return null;
+    }
+    
+    public static List<PersonalPreference> getPreferencesByAgeGroup(Character ageGroup) {
         return preferences.stream()
                 .filter(p -> p.getAgeGroup().equals(ageGroup))
                 .toList();
     }
     
-    public List<PersonalPreference> getPreferencesBySkiType(SkiTypes skiType) {
+    public static List<PersonalPreference> getPreferencesBySkiType(SkiTypes skiType) {
         return preferences.stream()
                 .filter(p -> p.getPrefferedSkis().stream().anyMatch(s -> s.getType().equals(skiType)))
                 .toList();
     }
     
-    public List<PersonalPreference> getPreferencesBySkiLength(Integer skiLength) {
+    public static List<PersonalPreference> getPreferencesBySkiLength(Integer skiLength) {
         return preferences.stream()
                 .filter(p -> p.getPrefferedSkis().stream().anyMatch(s -> s.getLength().equals(skiLength)))
                 .toList();
     }
     
-    public Integer getPreferenceAmount() {
+    public static PersonalPreference getPreferenceById(Integer id) {
+        return preferences.stream()
+                .filter(p -> p.getId().equals(id))
+                .findFirst()
+                .orElse(null);
+    }
+    
+    public static Integer getPreferenceAmount() {
         return preferences.size();
     }
 }
