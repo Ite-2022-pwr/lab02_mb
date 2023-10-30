@@ -7,7 +7,6 @@ public class AvailableStock {
     
     public AvailableStock(List<SkiGrouped> skis) {
         this.skis = skis;
-        this.skis.sort((s1, s2) -> s1.getSki().getType().compareTo(s2.getSki().getType()));
         
     }
     
@@ -17,6 +16,10 @@ public class AvailableStock {
     
     public void addSki(SkiGrouped ski) {
         skis.add(ski);
+    }
+    
+    public void removeSki(SkiGrouped ski) {
+        skis.get(skis.indexOf(ski)).setQuantity(skis.get(skis.indexOf(ski)).getQuantity() - 1);
     }
     
     public Integer getSkisAmountByLength(Integer length) {
@@ -55,5 +58,13 @@ public class AvailableStock {
             }
         }
         return matchingSkis;
+    }
+    
+    public Integer getTotalSkiAmount() {
+        Integer total = 0;
+        for (SkiGrouped ski : skis) {
+            total += ski.getQuantity();
+        }
+        return total;
     }
 }

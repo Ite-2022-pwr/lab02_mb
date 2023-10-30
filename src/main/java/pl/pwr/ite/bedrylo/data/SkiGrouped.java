@@ -14,6 +14,10 @@ public class SkiGrouped {
         return this.quantity;
     }
     
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+    
     public Ski getSki() {
         return this.ski;
     }

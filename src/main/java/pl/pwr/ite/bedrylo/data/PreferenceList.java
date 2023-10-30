@@ -30,4 +30,8 @@ public class PreferenceList {
                 .filter(p -> p.getPrefferedSkis().stream().anyMatch(s -> s.getLength().equals(skiLength)))
                 .toList();
     }
+    
+    public Integer getPreferenceAmount() {
+        return preferences.size();
+    }
 }

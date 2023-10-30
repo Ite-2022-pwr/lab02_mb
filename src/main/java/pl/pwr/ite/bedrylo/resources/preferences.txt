@@ -1,4 +1,4 @@
-0,J,Race:130;Carving:150
+0,A,Slalom:170;Carving:150
 1,J,Race:170;Gigant:170
 2,A,AllMountain:130
 3,J,AllMountain:160
