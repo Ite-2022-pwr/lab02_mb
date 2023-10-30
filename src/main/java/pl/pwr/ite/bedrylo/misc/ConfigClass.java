@@ -11,11 +11,23 @@ public abstract class ConfigClass {
         return skiListPath;
     }
     
+    public static void setSkiListPath(String skiListPath) {
+        ConfigClass.skiListPath = skiListPath;
+    }
+    
     public static String getPreferencesListPath() {
         return preferencesListPath;
     }
     
+    public static void setPreferencesListPath(String preferencesListPath) {
+        ConfigClass.preferencesListPath = preferencesListPath;
+    }
+    
     public static String getDiscountsListPath() {
         return discountsListPath;
+    }
+    
+    public static void setDiscountsListPath(String discountsListPath) {
+        ConfigClass.discountsListPath = discountsListPath;
     }
 }

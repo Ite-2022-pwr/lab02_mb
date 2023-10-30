@@ -47,4 +47,9 @@ public abstract class PreferenceList {
     public static Integer getPreferenceAmount() {
         return preferences.size();
     }
+    
+    public static Void sortByDiscountAscending() {
+        preferences.sort((p1, p2) -> p1.getDiscount().compareTo(p2.getDiscount()));
+        return null;
+    }
 }

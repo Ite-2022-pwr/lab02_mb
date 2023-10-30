@@ -1,13 +1,25 @@
 package pl.pwr.ite.bedrylo.data;
 
-import java.util.List;
+import org.jetbrains.annotations.NotNull;
+import pl.pwr.ite.bedrylo.logic.PairPointsCalculator;
 
-public class AvailableStock {
-    List<SkiGrouped> skis;
+import java.util.List;
+import java.util.Random;
+
+public class AvailableStock implements Cloneable{
+    
+    public static final Random random = new Random();
+    static List<SkiGrouped> skis;
     
     public AvailableStock(List<SkiGrouped> skis) {
         this.skis = skis;
-        
+    }
+    
+    public AvailableStock(@NotNull AvailableStock availableStock) {
+        //TODO przerób na array list może podziałą
+        for (SkiGrouped skiGrouped : availableStock.getSkis()) {
+            this.skis.add(new SkiGrouped(skiGrouped.getSki(), skiGrouped.getQuantity()));            
+        }
     }
     
     public List<SkiGrouped> getSkis() {
@@ -18,8 +30,16 @@ public class AvailableStock {
         skis.add(ski);
     }
     
-    public void removeSki(SkiGrouped ski) {
-        skis.get(skis.indexOf(ski)).setQuantity(skis.get(skis.indexOf(ski)).getQuantity() - 1);
+    public static void removeSki(Ski ski) {
+        for (SkiGrouped skiGrouped : skis) {
+            if (skiGrouped.getSki().equals(ski)) {
+                skiGrouped.setQuantity(skiGrouped.getQuantity() - 1);
+                if (skiGrouped.getQuantity() == 0) {
+                    skis.remove(skiGrouped);
+                }
+                return;
+            }
+        }
     }
     
     public Integer getSkisAmountByLength(Integer length) {
@@ -66,5 +86,27 @@ public class AvailableStock {
             total += ski.getQuantity();
         }
         return total;
+    }
+    
+    public SkiGrouped getExactSki(Ski ski) {
+        for (SkiGrouped skiGrouped : skis) {
+            if (skiGrouped.getSki().equals(ski)) {
+                return skiGrouped;
+            }
+        }
+        return null;
+    }
+    
+    public Integer getExactSkiAmount(Ski ski) {
+        for (SkiGrouped skiGrouped : skis) {
+            if (skiGrouped.getSki().equals(ski)) {
+                return skiGrouped.getQuantity();
+            }
+        }
+        return null;
+    }
+    
+    public Ski getRandomSki() {
+        return skis.get(random.nextInt(skis.size())).getSki();
     }
 }

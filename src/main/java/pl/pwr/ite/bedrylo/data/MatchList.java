@@ -1,11 +1,14 @@
 package pl.pwr.ite.bedrylo.data;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class MatchList {
     private ArrayList<Match> matches = new ArrayList<>();
     
     private Float points = 0f;
+    
+    private Integer nonNullMatches = 0;
     
     public MatchList() {}
     
@@ -19,6 +22,9 @@ public class MatchList {
     
     public void addMatch(Match match) {
         matches.add(match);
+        if (match.getSki() != null) {
+            nonNullMatches++;
+        }
         points += match.getPoints();
     }
     
@@ -34,12 +40,26 @@ public class MatchList {
         });
     }
     
+    public Integer getNonNullMatches() {
+        return nonNullMatches;
+    }
+    
     public ArrayList<Match> getTopNMatches(Integer n) {
+        this.sortDescendingPoints();
         ArrayList<Match> topNMatches = new ArrayList<>();
         for (int i = 0; i < n; i++) {
             topNMatches.add(matches.get(i));
         }
         return topNMatches;
+    }
+    
+    @Override
+    public String toString() {
+        return "MatchList{" +
+                "matches=" + matches.size() +
+                ", points=" + points +
+                ", nonNullMatches=" + nonNullMatches +
+                '}';
     }
     
 }
