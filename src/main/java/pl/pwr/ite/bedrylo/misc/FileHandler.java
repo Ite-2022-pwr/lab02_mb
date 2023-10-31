@@ -6,7 +6,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.function.Function;
 
@@ -26,8 +25,8 @@ public class FileHandler {
         }
     }
     
-    public static List<SkiGrouped> readSkiList(String filePath) {
-        return readFile(filePath, (line -> {
+    public static ArrayList<SkiGrouped> readSkiList(String filePath) {
+        return (ArrayList<SkiGrouped>) readFile(filePath, (line -> {
             var skiLine = line.split(",");
             var skiInfo = skiLine[1].split(":");
             Ski ski = new Ski(SkiTypes.getSkiType(skiInfo[0]), Integer.parseInt(skiInfo[1]));

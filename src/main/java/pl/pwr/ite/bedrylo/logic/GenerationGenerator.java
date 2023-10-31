@@ -5,10 +5,12 @@ import pl.pwr.ite.bedrylo.data.Generation;
 
 public abstract class GenerationGenerator  {
     public static Generation generateGeneration(AvailableStock availableStock, Integer matchListCount, Integer carryoverAmount, Generation bestGeneration, Integer comparisonAmount)throws CloneNotSupportedException{
-        Generation generation = new Generation(matchListCount);
+        Generation generation = new Generation(0);
         if (bestGeneration == null) {
             for (int i = 0; i < matchListCount; i++) {
                 AvailableStock tempAvailableStock = new AvailableStock(availableStock);
+//                AvailableStock tempAvailableStock = new AvailableStock();
+//                tempAvailableStock.setSkis(availableStock.getSkis());
                 generation.addMatchList(MatchListGenerator.generateMatchList(tempAvailableStock, null, comparisonAmount));
             }
             generation.sortDescendingPoints();

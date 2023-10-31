@@ -46,8 +46,5 @@ public class TestMain {
         for (MatchList matchList : generation.getMatchLists()) {
             System.out.println(matchList);
         }
-        for (SkiGrouped skiGrouped : availableStock.getSkis()) {
-            System.out.println(skiGrouped);
-        }
     }
 }

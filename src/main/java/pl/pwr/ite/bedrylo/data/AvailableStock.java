@@ -1,41 +1,55 @@
 package pl.pwr.ite.bedrylo.data;
 
-import org.jetbrains.annotations.NotNull;
-import pl.pwr.ite.bedrylo.logic.PairPointsCalculator;
-
-import java.util.List;
-import java.util.Random;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class AvailableStock implements Cloneable{
     
     public static final Random random = new Random();
-    static List<SkiGrouped> skis;
+    private ArrayList<SkiGrouped> skis;
     
-    public AvailableStock(List<SkiGrouped> skis) {
+    public AvailableStock(ArrayList<SkiGrouped> skis) {
         this.skis = skis;
     }
     
-    public AvailableStock(@NotNull AvailableStock availableStock) {
-        //TODO przerób na array list może podziałą
+    public AvailableStock() {
+        skis = new ArrayList<>();
+    }
+    
+//    @Override
+//    public Object clone() throws CloneNotSupportedException {
+//        AvailableStock clone = null;
+//        try {
+//            clone = (AvailableStock) super.clone();
+//        } catch (CloneNotSupportedException e) {
+//            e.printStackTrace();
+//        }
+//        skis = new ArrayList<>(skis);
+//        Collections.copy(skis, AvailableStock.getSkis());
+//        return clone;
+//    }
+    
+    public AvailableStock(AvailableStock availableStock){
+        this.skis = new ArrayList<SkiGrouped>();
         for (SkiGrouped skiGrouped : availableStock.getSkis()) {
-            this.skis.add(new SkiGrouped(skiGrouped.getSki(), skiGrouped.getQuantity()));            
+            this.skis.add(new SkiGrouped(skiGrouped.getSki(), skiGrouped.getQuantity()));
         }
     }
     
-    public List<SkiGrouped> getSkis() {
-        return skis;
+    public ArrayList<SkiGrouped> getSkis() {
+        return this.skis;
     }
     
     public void addSki(SkiGrouped ski) {
         skis.add(ski);
     }
     
-    public static void removeSki(Ski ski) {
-        for (SkiGrouped skiGrouped : skis) {
+    public void removeSki(Ski ski) {
+        for (SkiGrouped skiGrouped : this.skis) {
             if (skiGrouped.getSki().equals(ski)) {
                 skiGrouped.setQuantity(skiGrouped.getQuantity() - 1);
                 if (skiGrouped.getQuantity() == 0) {
-                    skis.remove(skiGrouped);
+                    this.skis.remove(skiGrouped);
                 }
                 return;
             }
@@ -104,6 +118,10 @@ public class AvailableStock implements Cloneable{
             }
         }
         return null;
+    }
+    
+    public void setSkis(ArrayList<SkiGrouped> skis) {
+        Collections.copy(this.skis, skis);
     }
     
     public Ski getRandomSki() {

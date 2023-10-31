@@ -31,7 +31,7 @@ public abstract class PairingMechanism {
         if (PairPointsCalculator.calculatePairPoints(preference, null) > points) {
             return new Match(preference.getId(), null);
         } else {
-            AvailableStock.removeSki(bestSki);
+            availableStock.removeSki(bestSki);
             return new Match(preference.getId(), bestSki);
         }
     }
