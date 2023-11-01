@@ -5,11 +5,7 @@ import java.util.List;
 
 public abstract class PreferenceList {
     private static ArrayList<PersonalPreference> preferences = new ArrayList<>();
-    
-    public PreferenceList(ArrayList<PersonalPreference> preferences) {
-        PreferenceList.preferences = preferences;
-    }
-    
+
     public static List<PersonalPreference> getPreferences() {
         return preferences;
     }
@@ -17,24 +13,6 @@ public abstract class PreferenceList {
     public static Void addPreference(PersonalPreference preference) {
         preferences.add(preference);
         return null;
-    }
-    
-    public static List<PersonalPreference> getPreferencesByAgeGroup(Character ageGroup) {
-        return preferences.stream()
-                .filter(p -> p.getAgeGroup().equals(ageGroup))
-                .toList();
-    }
-    
-    public static List<PersonalPreference> getPreferencesBySkiType(SkiTypes skiType) {
-        return preferences.stream()
-                .filter(p -> p.getPrefferedSkis().stream().anyMatch(s -> s.getType().equals(skiType)))
-                .toList();
-    }
-    
-    public static List<PersonalPreference> getPreferencesBySkiLength(Integer skiLength) {
-        return preferences.stream()
-                .filter(p -> p.getPrefferedSkis().stream().anyMatch(s -> s.getLength().equals(skiLength)))
-                .toList();
     }
     
     public static PersonalPreference getPreferenceById(Integer id) {

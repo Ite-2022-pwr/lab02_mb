@@ -12,10 +12,6 @@ public class Generation {
         generationCount++;
     }
     
-    public ArrayList<MatchList> getMatchLists() {
-        return matchLists;
-    }
-    
     public MatchList getBestMatchList() {
         this.sortDescendingPoints();
         return matchLists.get(0);
@@ -35,14 +31,6 @@ public class Generation {
                 return 1;
             }
         });
-    }
-    
-    public ArrayList<MatchList> getTopNMatchLists(Integer n) {
-        ArrayList<MatchList> topNMatchLists = new ArrayList<>();
-        for (int i = 0; i < n; i++) {
-            topNMatchLists.add(matchLists.get(i));
-        }
-        return topNMatchLists;
     }
     
     public Float getAveragePoints() {

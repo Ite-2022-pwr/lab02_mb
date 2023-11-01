@@ -40,10 +40,6 @@ public class MatchList {
         });
     }
     
-    public Integer getNonNullMatches() {
-        return nonNullMatches;
-    }
-    
     public ArrayList<Match> getTopNMatches(Integer n) {
         this.sortDescendingPoints();
         ArrayList<Match> topNMatches = new ArrayList<>();

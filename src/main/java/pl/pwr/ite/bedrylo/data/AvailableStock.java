@@ -12,10 +12,6 @@ public class AvailableStock implements Cloneable{
         this.skis = skis;
     }
     
-    public AvailableStock() {
-        skis = new ArrayList<>();
-    }
-    
     public AvailableStock(AvailableStock availableStock){
         this.skis = new ArrayList<SkiGrouped>();
         for (SkiGrouped skiGrouped : availableStock.getSkis()) {
@@ -25,10 +21,6 @@ public class AvailableStock implements Cloneable{
     
     public ArrayList<SkiGrouped> getSkis() {
         return this.skis;
-    }
-    
-    public void addSki(SkiGrouped ski) {
-        skis.add(ski);
     }
     
     public void removeSki(Ski ski) {
@@ -42,73 +34,13 @@ public class AvailableStock implements Cloneable{
             }
         }
     }
-    
-    public Integer getSkisAmountByLength(Integer length) {
-        for (SkiGrouped ski : skis) {
-            if (ski.getSki().getLength().equals(length)) {
-                return ski.getQuantity();
-            }
-        }
-        return null;
-    }
-    
-    public Integer getSkisAmountByType(SkiTypes type) {
-        for (SkiGrouped ski : skis) {
-            if (ski.getSki().getType().equals(type)) {
-                return ski.getQuantity();
-            }
-        }
-        return null;
-    }
-    
-    public List<SkiGrouped> getSkisByType(SkiTypes type) {
-        List<SkiGrouped> matchingSkis = null;
-        for (SkiGrouped ski : skis) {
-            if (ski.getSki().getType().equals(type)) {
-                matchingSkis.add(ski);
-            }
-        }
-        return matchingSkis;
-    }
-    
-    public List<SkiGrouped> getSkisByLength(Integer length) {
-        List<SkiGrouped> matchingSkis = null;
-        for (SkiGrouped ski : skis) {
-            if (ski.getSki().getLength().equals(length)) {
-                matchingSkis.add(ski);
-            }
-        }
-        return matchingSkis;
-    }
-    
+
     public Integer getTotalSkiAmount() {
         Integer total = 0;
         for (SkiGrouped ski : skis) {
             total += ski.getQuantity();
         }
         return total;
-    }
-    
-    public SkiGrouped getExactSki(Ski ski) {
-        for (SkiGrouped skiGrouped : skis) {
-            if (skiGrouped.getSki().equals(ski)) {
-                return skiGrouped;
-            }
-        }
-        return null;
-    }
-    
-    public Integer getExactSkiAmount(Ski ski) {
-        for (SkiGrouped skiGrouped : skis) {
-            if (skiGrouped.getSki().equals(ski)) {
-                return skiGrouped.getQuantity();
-            }
-        }
-        return null;
-    }
-    
-    public void setSkis(ArrayList<SkiGrouped> skis) {
-        Collections.copy(this.skis, skis);
     }
     
     public Ski getRandomSki() {

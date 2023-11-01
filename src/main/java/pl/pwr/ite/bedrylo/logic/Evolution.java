@@ -12,7 +12,6 @@ public abstract class Evolution {
         Integer repetitions = 0;
         Integer maxCarryoveramount = PreferenceList.getPreferenceAmount() - 1;
         for (int i = 0; i < generations; i++) {
-            ConfigClass.setActualGeneration(i);
             Generation newGeneration = GenerationGenerator.generateGeneration(availableStock, matchListCount, carryoverAmount, comparisonAmount, bestGeneration);
             if (bestGeneration == null || newGeneration.getMaxPoints() > bestGeneration.getMaxPoints()) {
                 bestGeneration = newGeneration;

@@ -15,8 +15,6 @@ public abstract class ConfigClass {
     
     private static Integer comparisonAmount = 0;
     
-    private static Integer actualGeneration = 0;
-    
     public static String getSkiListPath() {
         return skiListPath;
     }
@@ -72,12 +70,5 @@ public abstract class ConfigClass {
     public static void setComparisonAmount(Integer comparisonAmount) {
         ConfigClass.comparisonAmount = Math.max(1,comparisonAmount);
     }
-    
-    public static Integer getActualGeneration() {
-        return actualGeneration;
-    }
-    
-    public static void setActualGeneration(Integer actualGeneration) {
-        ConfigClass.actualGeneration = actualGeneration;
-    }
+
 }
