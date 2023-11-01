@@ -5,14 +5,20 @@ import java.util.ArrayList;
 public class Generation {
     private ArrayList<MatchList> matchLists = new ArrayList<>();
     
-    public Generation(Integer listCount) {
-        for (int i = 0; i < listCount; i++) {
-            matchLists.add(new MatchList());
-        }
+    private static Integer generationCount = 0;
+    
+    public Generation() {
+        this.matchLists = new ArrayList<>();
+        generationCount++;
     }
     
     public ArrayList<MatchList> getMatchLists() {
         return matchLists;
+    }
+    
+    public MatchList getBestMatchList() {
+        this.sortDescendingPoints();
+        return matchLists.get(0);
     }
     
     public void addMatchList(MatchList matchList) {
@@ -78,7 +84,8 @@ public class Generation {
     
     @Override
     public String toString() {
-        return "Generation{" +
+        return "Generation: " + generationCount + 
+                " {" +
                 "matchLists=" + matchLists.size() +
                 ", averagePoints=" + getAveragePoints() +
                 ", medianPoints=" + getMedianPoints() +

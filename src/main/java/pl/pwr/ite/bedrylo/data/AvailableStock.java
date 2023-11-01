@@ -16,19 +16,6 @@ public class AvailableStock implements Cloneable{
         skis = new ArrayList<>();
     }
     
-//    @Override
-//    public Object clone() throws CloneNotSupportedException {
-//        AvailableStock clone = null;
-//        try {
-//            clone = (AvailableStock) super.clone();
-//        } catch (CloneNotSupportedException e) {
-//            e.printStackTrace();
-//        }
-//        skis = new ArrayList<>(skis);
-//        Collections.copy(skis, AvailableStock.getSkis());
-//        return clone;
-//    }
-    
     public AvailableStock(AvailableStock availableStock){
         this.skis = new ArrayList<SkiGrouped>();
         for (SkiGrouped skiGrouped : availableStock.getSkis()) {

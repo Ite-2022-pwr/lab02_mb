@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="labyNarty:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/labyNarty_jar</output-path>
+    <root id="archive" name="labyNarty.jar">
+      <element id="module-output" name="labyNarty" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/jetbrains/annotations/24.0.0/annotations-24.0.0.jar" path-in-jar="/" />
+      <element id="module-source" name="labyNarty" />
+    </root>
+  </artifact>
+</component>

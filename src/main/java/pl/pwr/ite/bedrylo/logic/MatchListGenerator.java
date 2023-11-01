@@ -11,6 +11,7 @@ public abstract class MatchListGenerator {
             for (Match match : topNMatches) {
                 if (match.getSki() != null) {
                     matchList.addMatch(match);
+                    availableStock.removeSki(match.getSki());
                 }
             }
         }

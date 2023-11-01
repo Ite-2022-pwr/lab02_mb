@@ -9,7 +9,7 @@ import java.util.HashMap;
 public abstract class PairPointsCalculator {
     public static Float calculatePairPoints(@NotNull PersonalPreference preference, Ski ski){
         if (ski == null) {
-            return -500f;
+            return (100f - preference.getDiscount().floatValue())*(-5f);
         }
         Float points = null;
         for (Ski preferenceSki : preference.getPrefferedSkis()) {

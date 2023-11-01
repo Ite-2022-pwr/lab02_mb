@@ -31,6 +31,8 @@ public class Match {
     public String toString() {
         return "Match{" +
                 "preferenceId=" + preferenceId +
+                ", preffered skis=" + PreferenceList.getPreferenceById(preferenceId).getPrefferedSkis() +
+                ", discount type=" + PreferenceList.getPreferenceById(preferenceId).getAgeGroup() +
                 ", ski=" + ski +
                 ", points=" + points +
                 '}';

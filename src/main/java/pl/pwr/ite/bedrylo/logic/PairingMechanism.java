@@ -12,7 +12,7 @@ public abstract class PairingMechanism {
         Float points = null;
         Ski bestSki = null;
         List<SkiGrouped> test = availableStock.getSkis();
-        if (availableStock.getSkis().isEmpty() || availableStock.getSkis() == null) {
+        if (availableStock.getSkis() == null || availableStock.getSkis().isEmpty()) {
             return new Match(preference.getId(), null);
         } else if (availableStock.getTotalSkiAmount() < amount) {
             amount = availableStock.getTotalSkiAmount();

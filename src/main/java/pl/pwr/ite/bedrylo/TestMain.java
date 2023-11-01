@@ -1,10 +1,7 @@
 package pl.pwr.ite.bedrylo;
 
 import pl.pwr.ite.bedrylo.data.*;
-import pl.pwr.ite.bedrylo.logic.GenerationGenerator;
-import pl.pwr.ite.bedrylo.logic.MatchListGenerator;
-import pl.pwr.ite.bedrylo.logic.PairPointsCalculator;
-import pl.pwr.ite.bedrylo.logic.PairingMechanism;
+import pl.pwr.ite.bedrylo.logic.*;
 import pl.pwr.ite.bedrylo.misc.ConfigClass;
 import pl.pwr.ite.bedrylo.misc.FileHandler;
 
@@ -41,10 +38,11 @@ public class TestMain {
 //        System.out.println(testowa);
 //        System.out.println(testowa.getTopNMatches(10));
         
-        Generation generation = GenerationGenerator.generateGeneration(availableStock, 10, 10, null, 10);
-        System.out.println(generation);
-        for (MatchList matchList : generation.getMatchLists()) {
-            System.out.println(matchList);
+//        
+        MatchList bestMatchList = Evolution.evolve(availableStock, 1000, 30, 4);
+        System.out.println(bestMatchList);
+        for (Match match : bestMatchList.getMatches()) {
+            System.out.println(match);
         }
     }
 }
