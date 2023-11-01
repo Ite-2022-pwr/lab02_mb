@@ -60,4 +60,16 @@ public class FileHandler {
     return null;
     }
     
+    public static Void saveMatchList(String filePath, MatchList matchList) {
+        try {
+            var writer = new java.io.FileWriter(filePath);
+            writer.write(matchList.toFileString());
+            writer.close();
+        } catch (IOException exc) {
+            exc.printStackTrace();
+            throw new RuntimeException("Problem saving file");
+        }
+        return null;
+    }
+    
 }

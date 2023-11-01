@@ -1,6 +1,7 @@
 package pl.pwr.ite.bedrylo.logic;
 
 import pl.pwr.ite.bedrylo.data.*;
+import pl.pwr.ite.bedrylo.misc.ConfigClass;
 
 public abstract class Evolution {
     
@@ -11,6 +12,7 @@ public abstract class Evolution {
         Integer repetitions = 0;
         Integer maxCarryoveramount = PreferenceList.getPreferenceAmount() - 1;
         for (int i = 0; i < generations; i++) {
+            ConfigClass.setActualGeneration(i);
             Generation newGeneration = GenerationGenerator.generateGeneration(availableStock, matchListCount, carryoverAmount, comparisonAmount, bestGeneration);
             if (bestGeneration == null || newGeneration.getMaxPoints() > bestGeneration.getMaxPoints()) {
                 bestGeneration = newGeneration;
