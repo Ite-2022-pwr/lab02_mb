@@ -3,7 +3,7 @@ package pl.pwr.ite.bedrylo.data;
 public class SkiGrouped {
     private Integer quantity;
     
-    private Ski ski;
+    private final Ski ski;
     
     public SkiGrouped(Ski ski, int quantity) {
         this.ski = ski;

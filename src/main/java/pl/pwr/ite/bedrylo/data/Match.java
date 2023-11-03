@@ -3,11 +3,11 @@ package pl.pwr.ite.bedrylo.data;
 import pl.pwr.ite.bedrylo.logic.PairPointsCalculator;
 
 public class Match {
-    private Integer preferenceId;
+    private final Integer preferenceId;
     
-    private Ski ski;
+    private final Ski ski;
     
-    private Float points;
+    private final Float points;
     
     public Match(Integer preferenceId, Ski ski) {
         this.preferenceId = preferenceId;
@@ -31,7 +31,7 @@ public class Match {
     public String toString() {
         return "Match{" +
                 "preferenceId=" + preferenceId +
-                ", preffered skis=" + PreferenceList.getPreferenceById(preferenceId).getPrefferedSkis() +
+                ", preferred skis=" + PreferenceList.getPreferenceById(preferenceId).getPreferredSkis() +
                 ", discount type=" + PreferenceList.getPreferenceById(preferenceId).getAgeGroup() +
                 ", ski=" + ski +
                 ", points=" + points +

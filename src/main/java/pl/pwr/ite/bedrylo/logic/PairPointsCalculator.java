@@ -4,16 +4,14 @@ import org.jetbrains.annotations.NotNull;
 import pl.pwr.ite.bedrylo.data.PersonalPreference;
 import pl.pwr.ite.bedrylo.data.Ski;
 
-import java.util.HashMap;
-
 public abstract class PairPointsCalculator {
     public static Float calculatePairPoints(@NotNull PersonalPreference preference, Ski ski){
         if (ski == null) {
             return (100f - preference.getDiscount().floatValue())*(-5f);
         }
         Float points = null;
-        for (Ski preferenceSki : preference.getPrefferedSkis()) {
-            Float tempPoints = 0f;
+        for (Ski preferenceSki : preference.getPreferredSkis()) {
+            float tempPoints = 0f;
             if (ski.getType().equals(preferenceSki.getType())) {
                 tempPoints += 100f;
             } else {

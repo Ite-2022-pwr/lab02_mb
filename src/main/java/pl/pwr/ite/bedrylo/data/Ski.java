@@ -1,9 +1,9 @@
 package pl.pwr.ite.bedrylo.data;
 
 public class Ski {
-    private SkiTypes type;
+    private final SkiTypes type;
     
-    private Integer length;
+    private final Integer length;
     
     public Ski(SkiTypes type, Integer length) {
         this.type = type;

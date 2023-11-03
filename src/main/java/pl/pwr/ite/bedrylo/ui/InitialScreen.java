@@ -9,14 +9,12 @@ import pl.pwr.ite.bedrylo.misc.FileHandler;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class InitialScreen extends JFrame {
 
-    private SpinnerNumberModel generationSpinnerModel = new SpinnerNumberModel(100, 1, 10000, 1);
-    private SpinnerNumberModel matchListSpinnerModel = new SpinnerNumberModel(10, 1, 200, 1);
-    private SpinnerNumberModel comparisonSpinnerModel = new SpinnerNumberModel(5, 1, 100, 1);
+    private final SpinnerNumberModel generationSpinnerModel = new SpinnerNumberModel(100, 1, 10000, 1);
+    private final SpinnerNumberModel matchListSpinnerModel = new SpinnerNumberModel(10, 1, 200, 1);
+    private final SpinnerNumberModel comparisonSpinnerModel = new SpinnerNumberModel(5, 1, 100, 1);
     private JPanel panel1;
     private JButton preferenceButton;
     private JButton stockButton;
@@ -43,60 +41,47 @@ public class InitialScreen extends JFrame {
         setPreferredSize(new Dimension(800, 600));
         pack();
         setVisible(true);
-        preferenceButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JFileChooser fileChooser = new JFileChooser();
-                fileChooser.showOpenDialog(panel1);
-                ConfigClass.setPreferencesListPath(fileChooser.getSelectedFile().getAbsolutePath());
-                preferencePathLabel.setText("Wybrano plik preferencji");
-            }
+        preferenceButton.addActionListener(e -> {
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.showOpenDialog(panel1);
+            ConfigClass.setPreferencesListPath(fileChooser.getSelectedFile().getAbsolutePath());
+            preferencePathLabel.setText("Wybrano plik preferencji");
         });
-        stockButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JFileChooser fileChooser = new JFileChooser();
-                fileChooser.showOpenDialog(panel1);
-                ConfigClass.setSkiListPath(fileChooser.getSelectedFile().getAbsolutePath());
-                stockPathLabel.setText("Wybrano plik nart");
-            }
+        stockButton.addActionListener(e -> {
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.showOpenDialog(panel1);
+            ConfigClass.setSkiListPath(fileChooser.getSelectedFile().getAbsolutePath());
+            stockPathLabel.setText("Wybrano plik nart");
         });
-        discountButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JFileChooser fileChooser = new JFileChooser();
-                fileChooser.showOpenDialog(panel1);
-                ConfigClass.setDiscountsListPath(fileChooser.getSelectedFile().getAbsolutePath());
-                dicountPathLabel.setText("Wybrano plik rabatów");
-            }
+        discountButton.addActionListener(e -> {
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.showOpenDialog(panel1);
+            ConfigClass.setDiscountsListPath(fileChooser.getSelectedFile().getAbsolutePath());
+            dicountPathLabel.setText("Wybrano plik rabatów");
         });
-        startButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setTitle("Pracuję nad dopasowaniem nart");
-                startButton.setEnabled(false);
-                ConfigClass.setGenerationMaxNumber((Integer) generationCountSpinner.getValue());
-                ConfigClass.setMatchListCount((Integer) matchListCountSpinner.getValue());
-                ConfigClass.setComparisonAmount((Integer) comparisonCountSpinner.getValue());
-                try {
-                    AvailableStock availableStock = new AvailableStock(FileHandler.readSkiList(ConfigClass.getSkiListPath()));
-                    FileHandler.readDiscountList(ConfigClass.getDiscountsListPath());
-                    FileHandler.readPreferenceList(ConfigClass.getPreferencesListPath());
-                    PreferenceList.sortByDiscountAscending();
-                    MatchList bestMatchList = Evolution.evolve(availableStock, ConfigClass.getGenerationMaxNumber(), ConfigClass.getMatchListCount(), ConfigClass.getComparisonAmount());
-                    StringBuilder resultString = new StringBuilder();
-                    resultString.append(bestMatchList.toString()).append("\n\n");
-                    for (var match : bestMatchList.getMatches()) {
-                        resultString.append(match.toString()).append("\n");
-                    }
-                    setVisible(false);
-                    new EvolutionScreen(resultString.toString(), bestMatchList);
-                } catch (Exception exception) {
-                    warning.setText("Wystąpił błąd, sprawdź wprowadzone dane wejściowe i spróbuj ponownie");
-                    errorLabel.setText(exception.getMessage());
-                    startButton.setEnabled(true);
-                    return;
+        startButton.addActionListener(e -> {
+            setTitle("Pracuję nad dopasowaniem nart");
+            startButton.setEnabled(false);
+            ConfigClass.setGenerationMaxNumber((Integer) generationCountSpinner.getValue());
+            ConfigClass.setMatchListCount((Integer) matchListCountSpinner.getValue());
+            ConfigClass.setComparisonAmount((Integer) comparisonCountSpinner.getValue());
+            try {
+                AvailableStock availableStock = new AvailableStock(FileHandler.readSkiList(ConfigClass.getSkiListPath()));
+                FileHandler.readDiscountList(ConfigClass.getDiscountsListPath());
+                FileHandler.readPreferenceList(ConfigClass.getPreferencesListPath());
+                PreferenceList.sortByDiscountAscending();
+                MatchList bestMatchList = Evolution.evolve(availableStock, ConfigClass.getGenerationMaxNumber(), ConfigClass.getMatchListCount(), ConfigClass.getComparisonAmount());
+                StringBuilder resultString = new StringBuilder();
+                resultString.append(bestMatchList.toString()).append("\n\n");
+                for (var match : bestMatchList.getMatches()) {
+                    resultString.append(match.toString()).append("\n");
                 }
+                setVisible(false);
+                new EvolutionScreen(resultString.toString(), bestMatchList);
+            } catch (Exception exception) {
+                warning.setText("Wystąpił błąd, sprawdź wprowadzone dane wejściowe i spróbuj ponownie");
+                errorLabel.setText(exception.getMessage());
+                startButton.setEnabled(true);
             }
         });
     }

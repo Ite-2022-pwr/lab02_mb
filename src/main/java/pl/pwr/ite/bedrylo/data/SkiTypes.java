@@ -7,7 +7,7 @@ public enum SkiTypes {
     ALLMOUNTAIN("AllMountain"),
     CARVING("Carving");
     
-    private  String typeName;
+    private final String typeName;
     
     SkiTypes(String typeName) {
         this.typeName = typeName;

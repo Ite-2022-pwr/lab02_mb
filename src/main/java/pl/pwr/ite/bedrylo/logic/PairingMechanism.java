@@ -1,17 +1,12 @@
 package pl.pwr.ite.bedrylo.logic;
 
-import org.jetbrains.annotations.NotNull;
 import pl.pwr.ite.bedrylo.data.*;
-
-import java.util.List;
-import java.util.Random;
 
 public abstract class PairingMechanism {
     
     public static Match pair(PersonalPreference preference, AvailableStock availableStock, Integer amount) {
         Float points = null;
         Ski bestSki = null;
-        List<SkiGrouped> test = availableStock.getSkis();
         if (availableStock.getSkis() == null || availableStock.getSkis().isEmpty()) {
             return new Match(preference.getId(), null);
         } else if (availableStock.getTotalSkiAmount() < amount) {

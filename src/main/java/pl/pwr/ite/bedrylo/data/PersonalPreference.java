@@ -3,17 +3,17 @@ package pl.pwr.ite.bedrylo.data;
 import java.util.List;
 
 public class PersonalPreference {
-    private Integer id;
+    private final Integer id;
     
-    private List<Ski> prefferedSkis;
+    private final List<Ski> preferredSkis;
     
-    private Character ageGroup;
+    private final Character ageGroup;
     
-    private Integer discount;
+    private final Integer discount;
     
-    public PersonalPreference(Integer id, List<Ski> prefferedSkis, Character ageGroup) {
+    public PersonalPreference(Integer id, List<Ski> preferredSkis, Character ageGroup) {
         this.id = id;
-        this.prefferedSkis = prefferedSkis;
+        this.preferredSkis = preferredSkis;
         this.ageGroup = ageGroup;
         this.discount = DiscountList.getDiscount(ageGroup);
     }
@@ -22,8 +22,8 @@ public class PersonalPreference {
         return id;
     }
     
-    public List<Ski> getPrefferedSkis() {
-        return prefferedSkis;
+    public List<Ski> getPreferredSkis() {
+        return preferredSkis;
     }
     
     public Character getAgeGroup() {
@@ -38,7 +38,7 @@ public class PersonalPreference {
     public String toString() {
         return "Preference{" +
                 "id=" + id +
-                ", prefferedSkis=" + prefferedSkis +
+                ", preferredSkis=" + preferredSkis +
                 ", ageGroup=" + ageGroup +
                 ", discount=" + discount +
                 '}';

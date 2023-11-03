@@ -3,7 +3,7 @@ package pl.pwr.ite.bedrylo.data;
 import java.util.ArrayList;
 
 public class Generation {
-    private ArrayList<MatchList> matchLists = new ArrayList<>();
+    private final ArrayList<MatchList> matchLists;
     
     private static Integer generationCount = 0;
     

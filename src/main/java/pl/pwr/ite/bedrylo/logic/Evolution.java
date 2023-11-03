@@ -1,16 +1,18 @@
 package pl.pwr.ite.bedrylo.logic;
 
-import pl.pwr.ite.bedrylo.data.*;
-import pl.pwr.ite.bedrylo.misc.ConfigClass;
+import pl.pwr.ite.bedrylo.data.AvailableStock;
+import pl.pwr.ite.bedrylo.data.Generation;
+import pl.pwr.ite.bedrylo.data.MatchList;
+import pl.pwr.ite.bedrylo.data.PreferenceList;
 
 public abstract class Evolution {
     
     public static MatchList evolve(AvailableStock availableStock, Integer generations, Integer matchListCount, Integer comparisonAmount) {
         Generation bestGeneration = null;
-        Integer carryoverStep = Math.max(1,Math.floorDiv(PreferenceList.getPreferenceAmount(), generations));
-        Integer carryoverAmount = 0;
-        Integer repetitions = 0;
-        Integer maxCarryoveramount = PreferenceList.getPreferenceAmount() - 1;
+        int carryoverStep = Math.max(1,Math.floorDiv(PreferenceList.getPreferenceAmount(), generations));
+        int carryoverAmount = 0;
+        int repetitions = 0;
+        int maxCarryoveramount = PreferenceList.getPreferenceAmount() - 1;
         for (int i = 0; i < generations; i++) {
             Generation newGeneration = GenerationGenerator.generateGeneration(availableStock, matchListCount, carryoverAmount, comparisonAmount, bestGeneration);
             if (bestGeneration == null || newGeneration.getMaxPoints() > bestGeneration.getMaxPoints()) {
@@ -31,6 +33,7 @@ public abstract class Evolution {
                 return bestGeneration.getBestMatchList();
             }
         }
+        assert bestGeneration != null;
         return bestGeneration.getBestMatchList();
     }
     

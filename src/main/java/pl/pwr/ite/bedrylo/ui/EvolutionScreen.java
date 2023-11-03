@@ -1,18 +1,11 @@
 package pl.pwr.ite.bedrylo.ui;
 
-import pl.pwr.ite.bedrylo.data.AvailableStock;
-import pl.pwr.ite.bedrylo.data.DiscountList;
 import pl.pwr.ite.bedrylo.data.MatchList;
-import pl.pwr.ite.bedrylo.data.PreferenceList;
-import pl.pwr.ite.bedrylo.logic.Evolution;
 import pl.pwr.ite.bedrylo.misc.ConfigClass;
 import pl.pwr.ite.bedrylo.misc.FileHandler;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.text.RuleBasedCollator;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -40,34 +33,25 @@ public class EvolutionScreen extends JFrame {
         result.setEditable(false);
         result.setText(resultText);
         setVisible(true);
-        saveLocationButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JFileChooser fileChooser = new JFileChooser();
-                fileChooser.setDialogTitle("Wybierz lokalizacje zapisu");
-                fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-                int returnValue = fileChooser.showOpenDialog(null);
-                if (returnValue == JFileChooser.APPROVE_OPTION) {
-                    String simpleDatePattern = "yyyy-MM-dd-HH-mm-ss";
-                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat(simpleDatePattern);
-                    Date date = new Date();
-                    ConfigClass.setResultSavePath(fileChooser.getSelectedFile().getAbsolutePath() + "/result" + simpleDateFormat.format(date) + ".txt");
-                }
+        saveLocationButton.addActionListener(e -> {
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setDialogTitle("Wybierz lokalizacje zapisu");
+            fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            int returnValue = fileChooser.showOpenDialog(null);
+            if (returnValue == JFileChooser.APPROVE_OPTION) {
+                String simpleDatePattern = "yyyy-MM-dd-HH-mm-ss";
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat(simpleDatePattern);
+                Date date = new Date();
+                ConfigClass.setResultSavePath(fileChooser.getSelectedFile().getAbsolutePath() + "/result" + simpleDateFormat.format(date) + ".txt");
             }
         });
-        saveActionButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                FileHandler.saveMatchList(ConfigClass.getResultSavePath(), bestMatchList);
-                saveActionButton.setText("zapisano");
-            }
+        saveActionButton.addActionListener(e -> {
+            FileHandler.saveMatchList(ConfigClass.getResultSavePath(), bestMatchList);
+            saveActionButton.setText("zapisano");
         });
-        exitButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-                System.exit(0);
-            }
+        exitButton.addActionListener(e -> {
+            dispose();
+            System.exit(0);
         });
     }
 

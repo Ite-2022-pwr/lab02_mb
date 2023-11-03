@@ -1,10 +1,9 @@
 package pl.pwr.ite.bedrylo.data;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class MatchList {
-    private ArrayList<Match> matches = new ArrayList<>();
+    private final ArrayList<Match> matches = new ArrayList<>();
     
     private Float points = 0f;
     
@@ -61,10 +60,10 @@ public class MatchList {
     public String toFileString() {
         StringBuilder line = new StringBuilder();
         line.append("matches:").append(matches.size()).append(",points:").append(points).append(",nonNullMatches:").append(nonNullMatches).append("\n");
-        line.append("preferenceId,ageGroup,prefferedSkis->matchedSki,points\n");
+        line.append("preferenceId,ageGroup,preferredSkis->matchedSki,points\n");
         for (var match : matches) {
             line.append(match.getPreferenceId()).append(",").append(PreferenceList.getPreferenceById(match.getPreferenceId()).getAgeGroup()).append(",");
-            for (var ski : PreferenceList.getPreferenceById(match.getPreferenceId()).getPrefferedSkis()) {
+            for (var ski : PreferenceList.getPreferenceById(match.getPreferenceId()).getPreferredSkis()) {
                 line.append(ski.getType()).append(":").append(ski.getLength()).append(";");
             }
             line.append("->");

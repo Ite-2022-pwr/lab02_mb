@@ -1,19 +1,18 @@
 package pl.pwr.ite.bedrylo.data;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
-public class AvailableStock implements Cloneable{
+public class AvailableStock{
     
     public static final Random random = new Random();
-    private ArrayList<SkiGrouped> skis;
+    private final ArrayList<SkiGrouped> skis;
     
     public AvailableStock(ArrayList<SkiGrouped> skis) {
         this.skis = skis;
     }
     
     public AvailableStock(AvailableStock availableStock){
-        this.skis = new ArrayList<SkiGrouped>();
+        this.skis = new ArrayList<>();
         for (SkiGrouped skiGrouped : availableStock.getSkis()) {
             this.skis.add(new SkiGrouped(skiGrouped.getSki(), skiGrouped.getQuantity()));
         }

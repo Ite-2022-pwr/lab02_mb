@@ -30,21 +30,19 @@ public class FileHandler {
             var skiLine = line.split(",");
             var skiInfo = skiLine[1].split(":");
             Ski ski = new Ski(SkiTypes.getSkiType(skiInfo[0]), Integer.parseInt(skiInfo[1]));
-            SkiGrouped skiGrouped = new SkiGrouped(ski, Integer.parseInt(skiLine[0]));
-            return skiGrouped;
+            return new SkiGrouped(ski, Integer.parseInt(skiLine[0]));
         }));
     }
     
-    public static Void readDiscountList(String filePath) {
+    public static void readDiscountList(String filePath) {
         readFile(filePath, (line -> {
             var discountLine = line.split(",");
             DiscountList.addDiscount(discountLine[0].charAt(0), Integer.parseInt(discountLine[1]));
             return null;
         }));
-        return null;
     }
     
-    public static Void readPreferenceList(String filePath) {
+    public static void readPreferenceList(String filePath) {
             readFile(filePath, (line -> {
             var preferenceLine = line.split(",");
             var skiList = new ArrayList<Ski>();
@@ -57,10 +55,9 @@ public class FileHandler {
             PreferenceList.addPreference(new PersonalPreference(Integer.parseInt(preferenceLine[0]), skiList, preferenceLine[1].charAt(0)));
             return null;
         }));
-    return null;
     }
     
-    public static Void saveMatchList(String filePath, MatchList matchList) {
+    public static void saveMatchList(String filePath, MatchList matchList) {
         try {
             var writer = new java.io.FileWriter(filePath);
             writer.write(matchList.toFileString());
@@ -69,7 +66,6 @@ public class FileHandler {
             exc.printStackTrace();
             throw new RuntimeException("Problem saving file");
         }
-        return null;
     }
     
 }
