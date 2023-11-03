@@ -28,8 +28,8 @@ public abstract class Evolution {
                     carryoverAmount++;
                 }
             }
-            System.out.println(bestGeneration);
-            if ((Math.abs(bestGeneration.getMinPoints()/bestGeneration.getMaxPoints()) < 0.001)||(carryoverAmount > maxCarryoveramount)) {
+            System.out.println(bestGeneration+" "+Math.abs(Math.abs(bestGeneration.getMaxPoints()-bestGeneration.getMinPoints())/bestGeneration.getMaxPoints())*100+"%diff");
+            if ((Math.abs((bestGeneration.getMaxPoints()-bestGeneration.getMinPoints())/ bestGeneration.getMaxPoints()) < 0.01)||(carryoverAmount > maxCarryoveramount)) {
                 return bestGeneration.getBestMatchList();
             }
         }
