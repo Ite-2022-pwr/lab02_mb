@@ -70,6 +70,8 @@ public class InitialScreen extends JFrame {
                 FileHandler.readDiscountList(ConfigClass.getDiscountsListPath());
                 FileHandler.readPreferenceList(ConfigClass.getPreferencesListPath());
                 PreferenceList.sortByDiscountAscending();
+                errorLabel.setText("");
+                warning.setText("Pracuję nad dopasowaniem nart");
                 MatchList bestMatchList = Evolution.evolve(availableStock, ConfigClass.getGenerationMaxNumber(), ConfigClass.getMatchListCount(), ConfigClass.getComparisonAmount());
                 StringBuilder resultString = new StringBuilder();
                 resultString.append(bestMatchList.toString()).append("\n\n");
