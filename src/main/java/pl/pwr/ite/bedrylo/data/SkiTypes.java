@@ -19,7 +19,7 @@ public enum SkiTypes {
     
     public static SkiTypes getSkiType(String typeName) {
         for (SkiTypes skiType : SkiTypes.values()) {
-            if (skiType.getTypeName().equals(typeName)) {
+            if (skiType.getTypeName().equalsIgnoreCase(typeName)) {
                 return skiType;
             }
         }
